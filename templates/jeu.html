@@ -103,6 +103,26 @@
             <h1 class="title">Bienvenue, {{ pseudo }}</h1>
         </div>
 
+        <!-- Sélection du thème -->
+        <div class="box has-text-centered">
+            <form action="/jeu" method="get">
+                <input type="hidden" name="pseudo" value="{{ pseudo }}">
+                <div class="field">
+                    <label class="label">Sélectionnez un thème:</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="theme">
+                                <option value="PRODUIT">Général</option>
+                                <option value="PRODUIT_TEXTILE">Textile</option>
+                                <option value="PRODUIT_MULTIMEDIA">Multimédia</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button class="button is-primary" type="submit">Changer de thème</button>
+            </form>
+        </div>
+
         <!-- Information du produit -->
         <div id="product-info" class="box has-text-centered">
             <!-- Image du produit -->
