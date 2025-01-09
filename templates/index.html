@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juste Prix - Accueil</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* La section principale prend toute la hauteur et centre le contenu */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .swing {
+            animation: swing 2s ease-in-out infinite;
+        }
+
+        @keyframes swing {
+            0% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            100% { transform: rotate(-5deg); }
+        }
+
+        .bottom-right {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .logo-image {
+            width: 256px;
+            height: auto;
+        }
+
+        .large-image {
+            width: 300px;
+            height: auto;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+
+        /* Styles pour le mode sombre */
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .dark-mode .section {
+            background-color: #1e1e1e;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .input, .dark-mode .button {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .dark-mode .label, .dark-mode .title, .dark-mode .control {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column has-text-centered">
+                <figure class="image mx-auto logo-image">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo du Juste Prix">
+                </figure>
+                <form action="/jeu" method="get">
+                    <div class="field">
+                        <label class="label" for="pseudo">Entrez votre pseudo:</label>
+                        <div class="control">
+                            <input class="input" type="text" id="pseudo" name="pseudo" required>
+                        </div>
+                    </div>
+                    <button class="button is-primary is-large is-fullwidth mt-5" type="submit">Rejoindre le jeu</button>
+                </form>
+            </div>
+            <div class="column has-text-centered">
+                <figure class="image swing large-image mx-auto">
+                    <img src="{{ url_for('static', filename='img/lagaffe.png') }}" alt="Lagaffe se balance">
+                </figure>
+            </div>
+        </div>
+    </div>
+    <!-- Bouton Dark Mode dans le coin en bas à droite -->
+    <div class="bottom-right">
+        <button id="dark-mode-toggle" class="button is-light">Dark Mode</button>
+    </div>
+</section>
+
+<script>
+
+    // Gestion du thème de l'application
+    document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        this.classList.toggle('is-dark');
+        this.classList.toggle('is-light');
+        this.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+
+    // Application du mode sombre si l'utilisateur l'avait activé
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('dark-mode-toggle').classList.add('is-dark');
+        document.getElementById('dark-mode-toggle').classList.remove('is-light');
+        document.getElementById('dark-mode-toggle').textContent = 'Light Mode';
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juste Prix - Jeu</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .logo-image {
+            width: 200px;
+            height: auto;
+        }
+        .product-image {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        #product-price {
+            display: none;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .dark-mode .section {
+            background-color: #121212;
+        }
+        .dark-mode .box {
+            background-color: #1e1e1e;
+        }
+        .dark-mode .input, .dark-mode .button {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .dark-mode .label, .dark-mode .title, .dark-mode .control {
+            color: #ffffff;
+        }
+        .dark-mode ::placeholder {
+            color: #ffffff;
+        }
+        .bottom-right {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .score {
+            margin-top: 10px;
+            margin-left: 20px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-narrow">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo du Juste Prix" class="logo-image">
+                </a>
+            </div>
+        </div>
+
+        <div class="box has-text-centered">
+            <h1 class="title">Bienvenue, {{ pseudo }}</h1>
+        </div>
+
+        <div class="box has-text-centered">
+            <form id="theme-form" action="/jeu" method="get">
+                <input type="hidden" name="pseudo" value="{{ pseudo }}">
+                <div class="field">
+                    <label class="label">Sélectionnez un thème:</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="theme" id="theme-select" onchange="document.getElementById('theme-form').submit()">
+                                <option value="">Général</option>
+                                <option value="Textile">Textile</option>
+                                <option value="Multimedia">Multimédia</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="product-info" class="box has-text-centered">
+            <img id="product-image" src="{{ image }}" alt="Image du produit" class="product-image">
+            <h2 id="product-title" class="title is-4">{{ nom }}</h2>
+        </div>
+
+        <form method="POST" action="/jeu">
+            <input type="hidden" name="code_produit" value="{{ code }}">
+            <input type="hidden" name="pseudo" value="{{ pseudo }}">
+            <input type="hidden" name="theme" value="{{ theme }}">
+            <input type="hidden" name="image" value="{{ image }}">
+            <input type="hidden" name="nom" value="{{ nom }}">
+            <div class="field has-addons has-addons-centered mt-5">
+                <div class="control">
+                    <input class="input" type="text" name="prix" placeholder="Entrez votre prix" min="0" required>
+                </div>
+                <div class="control">
+                    <button class="button is-primary" type="submit">Valider</button>
+                </div>
+                <p class="score">Score : {{ score }}</p>
+            </div>
+        </form>
+        {% if result %}
+        <div class="notification is-info mt-5">
+            {{ result }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="bottom-right">
+        <button id="dark-mode-toggle" class="button is-light">Dark Mode</button>
+    </div>
+</section>
+
+<script>
+
+    // Gestion du thème de l'application
+    document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        this.classList.toggle('is-dark');
+        this.classList.toggle('is-light');
+        this.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+
+    // Application du mode sombre si l'utilisateur l'avait activé
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('dark-mode-toggle').classList.add('is-dark');
+        document.getElementById('dark-mode-toggle').classList.remove('is-light');
+        document.getElementById('dark-mode-toggle').textContent = 'Light Mode';
+    }
+
+    // Gestion de la catégorie des produits
+    function setSelectedTheme() {
+        const theme = "{{ theme }}";
+        const themeSelect = document.getElementById('theme-select');
+        themeSelect.value = theme;
+    }
+    window.onload = setSelectedTheme;
+
+    // Redirection après avoir trouvé le juste prix
+    {% if correct_guess %}
+        setTimeout(function() {
+            window.location.href = "{{ url_for('jeu_get', pseudo=pseudo, theme=theme) | safe}}";
+        }, 3000);
+    {% endif %}
+</script>
+</body>
+</html>
