@@ -1,42 +1,61 @@
-# GROUPE EKIP
+<h1 align="center">
+  <br>
+  <img src="https://github.com/quentinltg/juste-le-prix/blob/dev/static/img/logo.png" width="200">
+  <br>
+  <b>Juste le prix</b>
+  <br>
+</h1>
 
-## Membres :
-- Axel Rivière (__*scrum master*__)
-- Bylel Bourhim
-- Quentin Tripognez
-- Clément Markwitz
+<br>
 
-## Workflow : *Feature Branch Workflow*
+*Réalisé par [Axel](https://github.com/axelriv62) (Scrum Master), [Quentin](https://github.com/quentinltg), [Bylel](https://github.com/SirSweazzyyy) et [Clément](https://github.com/clement-markwitz), étudiants de deuxième année (promotion 24-25) de BUT Informatique au sein de l'IUT de Lens.*
 
-## Style de commit : 
- \*Fonctionnalité\* \*#ISSUE\*
+<br>
 
-## Produit backlog
-* une base de donnee avec 4 attributs :
-  - image du produit 
-  - le nom du produit
-  - le nom du joueur 
-  - le prix du produit 
-  - le score (nombre d'essais du joueur)
+<div align="center">  
+  <img src="https://github.com/quentinltg/juste-le-prix/blob/dev/static/img/dark_mode_jp.png" alt="Screenshot" width="800">  
+</div>  
 
-* une base de donnee avec les code des produits
+<br>
 
-* un programme principal qui gère les requetes à l'api
+## Présentation
 
-* une page web avec une boite de dialogue pour les entrees de l'utilisateur
+Cette application a été réalisée dans le cadre d'un projet de troisième semestre en BUT Informatique à l'IUT de Lens.
 
-* partie front 
+L'objectif principale était de concevoir un jeu du juste prix en Flask tout en gérant le projet avec Git et en appliquant la méthode Scrum.
 
-## Sprint backlog
+<br>
 
-* Création de la base de donnée de logs :
-  - Redaction du script sql de création des tables
-  - Intégration dans le programme python principal
+## Objectifs
 
-* Création de la base de donnée des codes :
-  - Redaction du script sql de création des tables
-  - Insertion des premiers codes des produits 
-  - Intégration dans le programme python principal
+- Intégrer une base de données pour stocker les produits et les logs de parties.
+- Récupérer les informations sur des produits d'Amazon grâce à une API.
+- Créer une interface graphique confortable pour jouer et administrer le jeu.
+- Implémenter des fonctionnalités variées pour rendre le jeu plus intéressant.
 
-* Création du programme principal :
-  - Gestion des requetes à l'api ws.chez-wam.info
+<br>
+
+# Features
+
+- Mode clair/sombre
+- Page d'accueil
+- Page d'insertion de produit
+- Page d'affichage des scores
+- Thèmes de produits
+- Bruitages
+
+<br>
+
+# Pistes d'amélioration
+
+Le projet étant terminé dans le cadre du cours, nous avon encore quelques pistes d'amélioration pour le jeu par nous-même.:
+
+- Ajouter un timer pour chaque partie.
+- Implémenter des niveaux de difficulté.
+- Intégrer un système de tri pour l'affichage des scores.
+
+<br>
+
+## Langages, Outils et Logiciels Utilisés
+
+![My Skills](https://go-skill-icons.vercel.app/api/icons?i=python,flask,bulma,sqlite,git,gitlab&theme=dark)
