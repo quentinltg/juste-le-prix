@@ -48,7 +48,7 @@ L'objectif principale était de concevoir un jeu du juste prix en Flask tout en 
 
 # Pistes d'amélioration
 
-Le projet étant terminé dans le cadre du cours, nous avon encore quelques pistes d'amélioration pour le jeu par nous-même.:
+Le projet étant terminé dans le cadre du cours, nous avons encore quelques pistes d'amélioration pour le jeu par nous-même.:
 
 - Ajouter un timer pour chaque partie.
 - Implémenter des niveaux de difficulté.
